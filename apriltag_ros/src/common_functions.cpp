@@ -519,6 +519,45 @@ geometry_msgs::PoseWithCovarianceStamped TagDetector::makeTagPose(
   return pose;
 }
 
+apriltag_ros::AprilTagDetectionPositionArray TagDetector::getCenterPosition (cv_bridge::CvImagePtr image)
+{
+  apriltag_ros::AprilTagDetectionPositionArray position_array;
+  for (int i = 0; i < zarray_size(detections_); i++)
+  {
+    apriltag_detection_t *det;
+    zarray_get(detections_, i, &det);
+
+    // Check if this ID is present in config/tags.yaml
+    // Check if is part of a tag bundle
+    int tagID = det->id;
+    bool is_part_of_bundle = false;
+    for (unsigned int j=0; j<tag_bundle_descriptions_.size(); j++)
+    {
+      TagBundleDescription bundle = tag_bundle_descriptions_[j];
+      if (bundle.id2idx_.find(tagID) != bundle.id2idx_.end())
+      {
+        is_part_of_bundle = true;
+        break;
+      }
+    }
+    // If not part of a bundle, check if defined as a standalone tag
+    StandaloneTagDescription* standaloneDescription;
+    if (!is_part_of_bundle &&
+        !findStandaloneTagDescription(tagID, standaloneDescription, false))
+    {
+      // Neither a standalone tag nor part of a bundle, so this is a "rogue"
+      // tag, skip it.
+      continue;
+    }
+    apriltag_ros::AprilTagDetectionPosition pos_data;
+    pos_data.x = (int)(det->c[0]);
+    pos_data.y = (int)(det->c[1]); 
+
+    position_array.detect_positions.push_back(pos_data);
+  }
+  return position_array;
+}
+
 void TagDetector::drawDetections (cv_bridge::CvImagePtr image)
 {
   for (int i = 0; i < zarray_size(detections_); i++)

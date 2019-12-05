@@ -49,7 +49,9 @@ add_compile_options("-O3" "-funsafe-loop-optimizations" "-fsee" "-funroll-loops"
 add_message_files(
   FILES
   AprilTagDetection.msg
+  AprilTagDetectionPosition.msg
   AprilTagDetectionArray.msg
+  AprilTagDetectionPositionArray.msg
 )
 
 add_service_files(

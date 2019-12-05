@@ -66,6 +66,8 @@
 
 #include "apriltag_ros/AprilTagDetection.h"
 #include "apriltag_ros/AprilTagDetectionArray.h"
+#include "apriltag_ros/AprilTagDetectionPosition.h"
+#include "apriltag_ros/AprilTagDetectionPositionArray.h"
 
 namespace apriltag_ros
 {
@@ -232,6 +234,8 @@ class TagDetector
 
   // Draw the detected tags' outlines and payload values on the image
   void drawDetections(cv_bridge::CvImagePtr image);
+
+  apriltag_ros::AprilTagDetectionPositionArray getCenterPosition(cv_bridge::CvImagePtr image);
 };
 
 } // namespace apriltag_ros
