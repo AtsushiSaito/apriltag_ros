@@ -550,6 +550,7 @@ apriltag_ros::AprilTagDetectionPositionArray TagDetector::getCenterPosition (cv_
       continue;
     }
     apriltag_ros::AprilTagDetectionPosition pos_data;
+    pos_data.id = tagID;
     pos_data.x = (int)(det->c[0]);
     pos_data.y = (int)(det->c[1]); 
 
