@@ -19,9 +19,11 @@
 #   ]
 standalone_tags:
   [
-    {id: 0, size: 0.16, name: "Apple"},
-    {id: 1, size: 0.16, name: "Banana"},
-    {id: 2, size: 0.16, name: "Orange"},
+    {id: 0, size: 0.113, name: "Apple"},
+    {id: 1, size: 0.113, name: "Orange"},
+    {id: 2, size: 0.113, name: "Melon"},
+    {id: 3, size: 0.113, name: "Lemon"},
+    {id: 4, size: 0.113, name: "Banana"},
   ]
 # ## Tag bundle definitions
 # ### Remarks
