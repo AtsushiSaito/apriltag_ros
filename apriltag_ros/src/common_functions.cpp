@@ -556,6 +556,8 @@ apriltag_ros::AprilTagDetectionPositionArray TagDetector::getCenterPosition (cv_
 
     position_array.detect_positions.push_back(pos_data);
   }
+  position_array.header.frame_id = "";
+  position_array.header.stamp = ros::Time::now();
   return position_array;
 }
 
